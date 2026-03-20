@@ -56,12 +56,17 @@ h1, h2, h3, h4, h5, h6,
   padding: 0.45rem 0.85rem !important;
   border-radius: 999px;
   transition: 0.25s ease;
+  background: transparent;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.nav-link:hover {
   color: var(--white);
   background: rgba(236, 72, 153, 0.95);
+}
+
+.nav-link.active {
+  color: var(--white);
+  background: transparent;
 }
 
 .nav-icon {
@@ -71,6 +76,15 @@ h1, h2, h3, h4, h5, h6,
 .site-main {
   background: var(--page-bg);
   min-height: calc(100vh - 132px);
+}
+
+.hero-section {
+  padding-top: 0;
+}
+
+.hero-carousel {
+  border-radius: 0;
+  overflow: hidden;
 }
 
 .carousel-image {
@@ -372,5 +386,11 @@ textarea.form-control {
 
   .carousel-image {
     height: 220px;
+  }
+
+  .custom-caption {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
   }
 }
