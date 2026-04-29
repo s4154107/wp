@@ -5,3 +5,40 @@ body {
 h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
 }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #111827;
+    color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+}
+
+.carousel-img {
+    height: 350px;
+    object-fit: cover;
+}
+
+.pet-card {
+    background: #1f2937;
+    color: white;
+    border: 1px solid #374151;
+}
+
+.pet-img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.btn-primary {
+    background-color: #6366f1;
+    border-color: #6366f1;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
