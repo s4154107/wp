@@ -1,14 +1,12 @@
 <?php
-$host = "talsprddb02.int.its.rmit.edu.au";
-$user = "s4154107";
-$password = "root";
-$database = "s4154107";
-
-$conn = mysqli_connect($host, $user, $password, $database);
+$conn = mysqli_connect(
+    "talsprddb02.int.its.rmit.edu.au", 
+    "s4154107",                        
+    "14492008Ks",            
+    "s4154107"                         
+);
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-
-mysqli_set_charset($conn, "utf8mb4");
 ?>
