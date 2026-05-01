@@ -1,13 +1,5 @@
 body {
     font-family: 'Inter', sans-serif;
-}
-
-h1, h2, h3 {
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
     background: #111827;
     color: #ffffff;
 }
@@ -17,38 +9,344 @@ h1, h2, h3, h4, h5, h6,
     font-family: 'Poppins', sans-serif;
 }
 
-.carousel-img {
-    height: 350px;
+.navbar {
+    background: linear-gradient(90deg, #6366f1, #4f46e5) !important;
+}
+
+.hero-carousel {
+    background: #111827;
+}
+
+.hero-img {
+    height: 320px;
     object-fit: cover;
+    filter: brightness(70%);
+}
+
+.custom-caption {
+    background: #6366f1;
+    border-radius: 10px;
+    padding: 15px;
+    left: 2%;
+    right: 2%;
+    bottom: 25px;
+}
+
+.custom-caption h5 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+}
+
+.section-title .material-icons {
+    color: #818cf8;
+}
+
+.title-line {
+    width: 70px;
+    height: 4px;
+    background: #ec4899;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.pet-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 .pet-card {
-    background: #1f2937;
-    color: white;
-    border: 1px solid #374151;
+    background: #111827;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    transition: transform 0.2s;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
 }
 
 .pet-img {
-    height: 180px;
+    height: 170px;
     object-fit: cover;
 }
 
-.btn-primary {
-    background-color: #6366f1;
-    border-color: #6366f1;
+.pet-card .card-body {
+    background: #111827;
+    color: white;
 }
 
-.btn-primary:hover {
-    background-color: #4f46e5;
-    border-color: #4f46e5;
+.pet-card h5 {
+    font-weight: 700;
 }
 
-.pet-detail-img {
-    width: 100%;
-    max-height: 420px;
-    object-fit: cover;
+.pet-small {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.price {
+    font-weight: 700;
+}
+
+footer {
+    background: linear-gradient(90deg, #ffffff, #6b7280) !important;
+    color: white;
+    border-top: 4px solid #ec4899;
 }
 
 .gallery-img {
     cursor: pointer;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+}
+
+.small-icon {
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.hero-carousel {
+    margin-top: -10px;
+}
+
+.hero-img {
+    height: 260px;   /* 👈 REDUCED from big height */
+    object-fit: cover;
+    filter: brightness(65%);
+}
+
+.navbar {
+    background: linear-gradient(90deg, #7c83ff, #6c63ff);
+    padding: 12px 20px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 20px;
+    color: white !important;
+}
+
+.navbar a {
+    color: rgba(255,255,255,0.9) !important;
+}
+
+.navbar a:hover {
+    color: white !important;
+}
+
+.custom-caption {
+    background: linear-gradient(90deg, #7c83ff, #6c63ff);
+    border-radius: 12px;
+    padding: 12px;
+    left: 3%;
+    right: 3%;
+    bottom: 20px;
+    text-align: center;
+}
+
+.custom-caption h5 {
+    margin: 0;
+    font-weight: 700;
+    color: white;
+}
+
+body {
+    background: linear-gradient(180deg, #0f172a, #1e293b);
+    color: white;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title .material-icons {
+    color: #a78bfa;
+}
+
+.title-line {
+    width: 60px;
+    height: 4px;
+    background: #ec4899;
+    border-radius: 10px;
+    margin-top: 6px;
+}
+
+.pet-card {
+    background: #0f172a;
+    border-radius: 14px;
+    overflow: hidden;
+    border: none;
+    transition: 0.25s;
+}
+
+.pet-card:hover {
+    transform: translateY(-6px);
+}
+
+.pet-img {
+    height: 160px;
+    object-fit: cover;
+}
+
+.pet-card .card-body {
+    padding: 12px;
+}
+
+.pet-card h5 {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.pet-small {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.price {
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.gallery-page .card,
+.gallery-page .card-body,
+.gallery-page .pet-card {
+    background-color: #0f172a !important;
+    color: white !important;
+    border: none !important;
+}
+
+.gallery-page .card h5,
+.gallery-page .card p {
+    color: white !important;
+}
+
+.pet-nav {
+    background: linear-gradient(90deg, #6366f1, #4f46e5) !important;
+    padding: 10px 12px;
+}
+
+.pet-nav .navbar-brand {
+    color: white !important;
+    font-weight: 800;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-logo-icon {
+    font-size: 26px;
+}
+
+.pet-nav .nav-link {
+    color: white !important;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 13px !important;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-icon {
+    font-size: 14px;
+}
+
+.pet-nav .nav-link:hover,
+.pet-nav .active-nav {
+    background: #ec4899;
+    color: white !important;
+}
+
+.pet-nav .nav-link {
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect ONLY */
+.pet-nav .nav-link:hover {
+    background: #ec4899;
+    color: white !important;
+}
+
+/* Active page (optional subtle style instead of pink) */
+.pet-nav .nav-link.active {
+    background: rgba(255,255,255,0.15);
+}
+
+.pet-nav .container-fluid {
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* Move nav items LEFT */
+.pet-nav .navbar-nav {
+    margin-left: 20px !important;
+}
+
+/* Move logo slightly LEFT */
+.pet-nav .navbar-brand {
+    margin-left: 0 !important;
+}
+
+.modal-content {
+    background: #111827 !important;
+    border: 1px solid #374151 !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #6366f1, #4f46e5) !important;
+    color: white !important;
+    padding: 10px 14px !important;
+    border-bottom: none !important;
+}
+
+.modal-title {
+    color: white !important;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.modal-body {
+    background: #111827 !important;
+    padding: 18px !important;
+}
+
+#modalImage {
+    max-height: 520px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+.modal-dialog {
+    max-width: 680px !important;
 }

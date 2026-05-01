@@ -10,7 +10,7 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 ?>
 
-<main class="container mt-4">
+<main class="container mt-4 gallery-page">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Pet Gallery</h1>
 
@@ -29,7 +29,7 @@ $result = mysqli_stmt_get_result($stmt);
             ?>
 
             <div class="col-12 col-sm-6 col-lg-3 pet-gallery-item" data-status="<?php echo htmlspecialchars($pet['status']); ?>">
-                <div class="card h-100">
+                <div class="card pet-card h-100">
                     <img src="<?php echo htmlspecialchars($imageUrl); ?>"
                          class="card-img-top pet-img gallery-img"
                          alt="<?php echo htmlspecialchars($pet['name']); ?>"
