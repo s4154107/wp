@@ -1,11 +1,10 @@
 <?php
-$host = "localhost";
-$user = "root";
+$host = "talsprddb02.int.its.rmit.edu.au";
+$user = "s4154107";
 $password = "root";
-$database = "petconnect";
-$port = 8889;
+$database = "s4154107";
 
-$conn = mysqli_connect($host, $user, $password, $database, $port);
+$conn = mysqli_connect($host, $user, $password, $database);
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
