@@ -22,7 +22,7 @@ $result = mysqli_stmt_get_result($stmt);
 <?php while ($pet = mysqli_fetch_assoc($result)) { ?>
     <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
-            <img src="assets/images/pets/<?php echo htmlspecialchars($pet['image_path']); ?>" 
+            <img src="/wp/a2/assets/images/pets/<?php echo htmlspecialchars($pet['image_path']); ?>"
                  class="card-img-top pet-img" 
                  alt="<?php echo htmlspecialchars($pet['name']); ?>">
 
