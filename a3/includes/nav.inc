@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/functions.inc';
+?>
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark gradient-nav">
     <div class="container-fluid px-3">
