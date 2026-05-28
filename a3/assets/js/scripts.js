@@ -1,4 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const statusFilter = document.getElementById("statusFilter");
+
+  if (statusFilter) {
+    statusFilter.addEventListener("change", function () {
+      const selected = this.value;
+
+      document.querySelectorAll(".gallery-item").forEach(function (item) {
+        if (selected === "all" || item.dataset.status === selected) {
+          item.style.display = "";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  }
+
+  const imageModal = document.getElementById("imageModal");
+
+  if (imageModal) {
+    imageModal.addEventListener("show.bs.modal", function (event) {
+      const img = event.relatedTarget;
+      document.getElementById("modalImage").src = img.dataset.image;
+      document.getElementById("modalTitle").textContent = img.dataset.name;
+    });
+  }
+
   const fileInput = document.querySelector('input[type="file"][name="image"]');
   const preview = document.getElementById("imagePreview");
 
@@ -13,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!allowed.includes(ext)) {
         alert("Only jpg, jpeg, png, gif and webp files are allowed.");
         this.value = "";
-        if (preview) preview.classList.add("d-none");
         return;
       }
 
@@ -21,31 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         preview.src = URL.createObjectURL(file);
         preview.classList.remove("d-none");
       }
-    });
-  }
-
-  const filter = document.getElementById("categoryFilter");
-
-  if (filter) {
-    filter.addEventListener("change", function () {
-      const selected = this.value;
-      document.querySelectorAll(".gallery-item").forEach(function (item) {
-        if (selected === "all" || item.dataset.species === selected) {
-          item.style.display = "";
-        } else {
-          item.style.display = "none";
-        }
-      });
-    });
-  }
-
-  const imageModal = document.getElementById("imageModal");
-
-  if (imageModal) {
-    imageModal.addEventListener("show.bs.modal", function (event) {
-      const img = event.relatedTarget;
-      const src = img.getAttribute("data-image");
-      document.getElementById("modalImage").src = src;
     });
   }
 });

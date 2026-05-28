@@ -5,23 +5,36 @@ require_login();
 $page_title = 'Add Pet';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  try {
-    $name = trim($_POST['name']);
-    $species = trim($_POST['species']);
-    $breed = trim($_POST['breed']);
-    $age_years = (int)$_POST['age_years'];
-    $age_months = (int)$_POST['age_months'];
-    $gender = trim($_POST['gender']);
-    $size = trim($_POST['size']);
-    $price = (float)$_POST['price'];
-    $description = trim($_POST['description']);
-    $health = trim($_POST['health']);
-    $status = trim($_POST['status']);
-    $image = upload_pet_image('image');
+  $name = trim($_POST['name']);
+  $species = trim($_POST['species']);
+  $breed = trim($_POST['breed']);
+  $age_years = (int)$_POST['age_years'];
+  $age_months = (int)$_POST['age_months'];
+  $gender = trim($_POST['gender']);
+  $size = trim($_POST['size']);
+  $price = (float)$_POST['price'];
+  $description = trim($_POST['description']);
+  $health = trim($_POST['health']);
+  $status = trim($_POST['status']);
 
+  $image = '';
+
+  if (!empty($_FILES['image']['name'])) {
+    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($ext, $allowed)) {
+      $error = "Only jpg, jpeg, png, gif and webp files are allowed.";
+    } else {
+      $image = uniqid('pet_', true) . '.' . $ext;
+      move_uploaded_file($_FILES['image']['tmp_name'], 'assets/images/pets/' . $image);
+    }
+  }
+
+  if (!isset($error)) {
     $sql = "INSERT INTO pets
-      (name, species, breed, age_years, age_months, gender, size, price, description, health, status, image, user_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            (name, species, breed, age_years, age_months, gender, size, price, description, health, status, image, user_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $sql);
 
@@ -45,18 +58,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     mysqli_stmt_execute($stmt);
 
-    flash('success', 'Pet added successfully.');
     header('Location: index.php');
     exit;
-  } catch (Exception $e) {
-    flash('danger', $e->getMessage());
   }
 }
 
 include 'includes/header.inc';
 ?>
 
-<h1 class="page-title">➕ Add a New Pet for Adoption</h1>
+<h1 class="page-title">⊕ Add a New Pet for Adoption</h1>
+
+<?php if(isset($error)): ?>
+  <div class="alert alert-danger"><?= h($error) ?></div>
+<?php endif; ?>
 
 <form method="post" enctype="multipart/form-data">
   <div class="row g-3">
@@ -107,6 +121,7 @@ include 'includes/header.inc';
         <option>Small</option>
         <option>Medium</option>
         <option>Large</option>
+        <option>Extra Large</option>
       </select>
     </div>
 

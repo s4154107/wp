@@ -19,3 +19,15 @@ function current_user() {
  function pet_img($path) {
     return 'assets/images/pets/' . $path;
 }
+function get_pet($conn, $id) {
+    $sql = "SELECT p.*, u.username, u.email, u.phone, u.location
+            FROM pets p
+            JOIN users u ON p.user_id = u.user_id
+            WHERE p.pet_id = ?";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+    mysqli_stmt_execute($stmt);
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+}

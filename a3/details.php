@@ -1,40 +1,36 @@
 <?php
 require_once 'includes/db_connect.inc';
-$page_title='Pet Details';
+$page_title = 'Pet Details';
 include 'includes/header.inc';
 
-$id=(int)($_GET['id']??0);
-$pet=get_pet($conn,$id);
+$id = (int)($_GET['id'] ?? 0);
+$pet = get_pet($conn, $id);
 
-if(!$pet){
-  flash('danger','Pet not found.');
-  header('Location:pets.php');
+if (!$pet) {
+  echo "<p>Pet not found.</p>";
+  include 'includes/footer.inc';
   exit;
 }
 
-if(isset($_POST['delete']) && logged_in() && $_SESSION['user_id']==$pet['user_id']){
-  $stmt=mysqli_prepare($conn,"DELETE FROM pets WHERE pet_id=? AND user_id=?");
-  mysqli_stmt_bind_param($stmt,'ii',$id,$_SESSION['user_id']);
+if (isset($_POST['delete']) && logged_in() && $_SESSION['user_id'] == $pet['user_id']) {
+  $stmt = mysqli_prepare($conn, "DELETE FROM pets WHERE pet_id=? AND user_id=?");
+  mysqli_stmt_bind_param($stmt, 'ii', $id, $_SESSION['user_id']);
   mysqli_stmt_execute($stmt);
 
-  $file=__DIR__.'/assets/images/pets/'.$pet['image'];
-  if(is_file($file)) unlink($file);
-
-  flash('success','Pet deleted.');
-  header('Location:pets.php');
+  header('Location: pets.php');
   exit;
 }
 ?>
 
 <div class="row g-4">
   <div class="col-lg-5">
-    <img src="<?= pet_img($pet['image']) ?>" class="detail-img" alt="<?= h($pet['name']) ?>">
+    <img src="assets/images/pets/<?= h($pet['image']) ?>" class="detail-img" alt="<?= h($pet['name']) ?>">
   </div>
 
   <div class="col-lg-7">
     <h1 class="page-title mb-2"><?= h($pet['name']) ?></h1>
 
-    <span class="badge badge-purple me-2"><?= h($pet['species']) ?></span>
+    <span class="badge badge-purple"><?= h($pet['species']) ?></span>
     <span class="badge badge-pink"><?= h($pet['status']) ?></span>
 
     <table class="info-table mt-3">
@@ -46,20 +42,20 @@ if(isset($_POST['delete']) && logged_in() && $_SESSION['user_id']==$pet['user_id
     </table>
 
     <h4 class="mt-4">📋 Description</h4>
-    <p><?= nl2br(h($pet['description'])) ?></p>
+    <p><?= h($pet['description']) ?></p>
 
     <h4 class="mt-4">💚 Health Information</h4>
-    <p><?= nl2br(h($pet['health'])) ?></p>
+    <p><?= h($pet['health']) ?></p>
 
     <hr>
 
     <h4>Contact Owner</h4>
-    <p>👤 Name: <a href="owner.php?id=<?= $pet['user_id'] ?>"><?= h($pet['username']) ?></a></p>
-    <p>✉️ Email: <a href="mailto:<?= h($pet['email']) ?>"><?= h($pet['email']) ?></a></p>
-    <p>📞 Phone: <?= h($pet['phone']) ?></p>
-    <p>📍 Location: <?= h($pet['location']) ?></p>
+    <p>👤 <strong>Name:</strong> <a href="owner.php?id=<?= $pet['user_id'] ?>"><?= h($pet['username']) ?></a></p>
+    <p>✉️ <strong>Email:</strong> <a href="mailto:<?= h($pet['email']) ?>"><?= h($pet['email']) ?></a></p>
+    <p>📞 <strong>Phone:</strong> <?= h($pet['phone']) ?></p>
+    <p>📍 <strong>Location:</strong> <?= h($pet['location']) ?></p>
 
-    <?php if(logged_in() && $_SESSION['user_id']==$pet['user_id']): ?>
+    <?php if (logged_in() && $_SESSION['user_id'] == $pet['user_id']): ?>
       <hr>
       <a href="edit.php?id=<?= $pet['pet_id'] ?>" class="btn btn-orange">✏️ Edit</a>
 
@@ -73,9 +69,9 @@ if(isset($_POST['delete']) && logged_in() && $_SESSION['user_id']==$pet['user_id
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog modal-dialog-centered">
     <form method="post" class="modal-content">
-      <div class="modal-header confirm-header">
+      <div class="modal-header bg-danger text-white">
         <h5 class="modal-title">⚠ Confirm Deletion</h5>
-        <button class="btn-close" data-bs-dismiss="modal"></button>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body text-dark">

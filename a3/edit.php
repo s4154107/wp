@@ -6,7 +6,6 @@ $id = (int)($_GET['id'] ?? 0);
 $pet = get_pet($conn, $id);
 
 if (!$pet || $_SESSION['user_id'] != $pet['user_id']) {
-  flash('danger', 'You are not allowed to edit this pet.');
   header('Location: pets.php');
   exit;
 }
@@ -14,20 +13,38 @@ if (!$pet || $_SESSION['user_id'] != $pet['user_id']) {
 $page_title = 'Edit Pet';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  try {
-    $name = trim($_POST['name']);
-    $species = trim($_POST['species']);
-    $breed = trim($_POST['breed']);
-    $age_years = (int)$_POST['age_years'];
-    $age_months = (int)$_POST['age_months'];
-    $gender = trim($_POST['gender']);
-    $size = trim($_POST['size']);
-    $price = (float)$_POST['price'];
-    $description = trim($_POST['description']);
-    $health = trim($_POST['health']);
-    $status = trim($_POST['status']);
-    $image = upload_pet_image('image', $pet['image']);
+  $name = trim($_POST['name']);
+  $species = trim($_POST['species']);
+  $breed = trim($_POST['breed']);
+  $age_years = (int)$_POST['age_years'];
+  $age_months = (int)$_POST['age_months'];
+  $gender = trim($_POST['gender']);
+  $size = trim($_POST['size']);
+  $price = (float)$_POST['price'];
+  $description = trim($_POST['description']);
+  $health = trim($_POST['health']);
+  $status = trim($_POST['status']);
+  $image = $pet['image'];
 
+  if (!empty($_FILES['image']['name'])) {
+    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($ext, $allowed)) {
+      $error = "Only jpg, jpeg, png, gif and webp files are allowed.";
+    } else {
+      $newImage = uniqid('pet_', true) . '.' . $ext;
+      move_uploaded_file($_FILES['image']['tmp_name'], 'assets/images/pets/' . $newImage);
+
+      if ($image && file_exists('assets/images/pets/' . $image)) {
+        unlink('assets/images/pets/' . $image);
+      }
+
+      $image = $newImage;
+    }
+  }
+
+  if (!isset($error)) {
     $sql = "UPDATE pets
             SET name=?, species=?, breed=?, age_years=?, age_months=?, gender=?, size=?, price=?, description=?, health=?, status=?, image=?
             WHERE pet_id=? AND user_id=?";
@@ -55,11 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     mysqli_stmt_execute($stmt);
 
-    flash('success', 'Pet updated successfully.');
     header('Location: details.php?id=' . $id);
     exit;
-  } catch (Exception $e) {
-    flash('danger', $e->getMessage());
   }
 }
 
@@ -67,6 +81,10 @@ include 'includes/header.inc';
 ?>
 
 <h1 class="page-title">Edit Pet: <?= h($pet['name']) ?></h1>
+
+<?php if(isset($error)): ?>
+  <div class="alert alert-danger"><?= h($error) ?></div>
+<?php endif; ?>
 
 <form method="post" enctype="multipart/form-data">
   <div class="row g-3">
@@ -79,7 +97,7 @@ include 'includes/header.inc';
       <label class="form-label">Species *</label>
       <select class="form-select" name="species" required>
         <?php foreach(['Dog','Cat','Bird','Rabbit'] as $option): ?>
-          <option <?= $pet['species']===$option?'selected':'' ?>><?= $option ?></option>
+          <option <?= $pet['species']===$option ? 'selected' : '' ?>><?= $option ?></option>
         <?php endforeach; ?>
       </select>
     </div>
@@ -103,7 +121,7 @@ include 'includes/header.inc';
       <label class="form-label">Gender *</label>
       <select class="form-select" name="gender" required>
         <?php foreach(['Male','Female'] as $option): ?>
-          <option <?= $pet['gender']===$option?'selected':'' ?>><?= $option ?></option>
+          <option <?= $pet['gender']===$option ? 'selected' : '' ?>><?= $option ?></option>
         <?php endforeach; ?>
       </select>
     </div>
@@ -111,8 +129,8 @@ include 'includes/header.inc';
     <div class="col-md-4">
       <label class="form-label">Size *</label>
       <select class="form-select" name="size" required>
-        <?php foreach(['Small','Medium','Large'] as $option): ?>
-          <option <?= $pet['size']===$option?'selected':'' ?>><?= $option ?></option>
+        <?php foreach(['Small','Medium','Large','Extra Large'] as $option): ?>
+          <option <?= $pet['size']===$option ? 'selected' : '' ?>><?= $option ?></option>
         <?php endforeach; ?>
       </select>
     </div>
@@ -136,14 +154,16 @@ include 'includes/header.inc';
       <label class="form-label">Status *</label>
       <select class="form-select" name="status">
         <?php foreach(['Available','Pending','Adopted'] as $option): ?>
-          <option <?= $pet['status']===$option?'selected':'' ?>><?= $option ?></option>
+          <option <?= $pet['status']===$option ? 'selected' : '' ?>><?= $option ?></option>
         <?php endforeach; ?>
       </select>
     </div>
 
     <div class="col-12">
       <label class="form-label">Current Photo</label><br>
-      <img src="<?= pet_img($pet['image']) ?>" class="rounded mb-3" style="max-width:150px;">
+      <img src="assets/images/pets/<?= h($pet['image']) ?>" class="rounded mb-3" style="max-width:150px;">
+
+      <label class="form-label d-block">Update Pet Photo Optional</label>
       <input class="form-control" type="file" name="image" id="image" accept=".jpg,.jpeg,.png,.gif,.webp">
       <img id="imagePreview" class="mt-3 rounded d-none" style="max-width:180px;">
     </div>

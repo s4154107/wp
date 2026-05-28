@@ -3,38 +3,48 @@ require_once 'includes/db_connect.inc';
 $page_title = 'Gallery';
 include 'includes/header.inc';
 
-$sql = "SELECT * FROM pets ORDER BY pet_id DESC";
+$sql = "SELECT * FROM pets ORDER BY pet_id ASC";
 $result = mysqli_query($conn, $sql);
 ?>
 
-<h1 class="page-title">Pet Gallery</h1>
+<div class="d-flex justify-content-between align-items-start mb-4">
+  <h1 class="page-title">Pet Gallery</h1>
 
-<div class="mb-4">
-  <select id="categoryFilter" class="form-select w-auto">
-    <option value="all">All Pets</option>
-    <option value="Dog">Dogs</option>
-    <option value="Cat">Cats</option>
-    <option value="Bird">Birds</option>
-    <option value="Rabbit">Rabbits</option>
-  </select>
+  <div>
+    <label class="form-label">🔽 Filter by Status:</label>
+    <select id="statusFilter" class="form-select">
+      <option value="all">Show All</option>
+      <option value="Available">Available</option>
+      <option value="Pending">Pending</option>
+      <option value="Adopted">Adopted</option>
+    </select>
+  </div>
 </div>
 
 <div class="row g-4">
-  <?php while($pet = mysqli_fetch_assoc($result)): ?>
-    <div class="col-md-4 gallery-item" data-species="<?= h($pet['species']) ?>">
+  <?php while($pet=mysqli_fetch_assoc($result)): ?>
+    <div class="col-md-6 col-lg-3 gallery-item" data-status="<?= h($pet['status']) ?>">
       <div class="card pet-card h-100">
-        <img src="<?= pet_img($pet['image']) ?>"
-             class="card-img-top gallery-image"
+        <img src="assets/images/pets/<?= h($pet['image']) ?>"
+             class="gallery-image"
              alt="<?= h($pet['name']) ?>"
              data-bs-toggle="modal"
              data-bs-target="#imageModal"
-             data-image="<?= pet_img($pet['image']) ?>">
+             data-name="<?= h($pet['name']) ?>"
+             data-image="assets/images/pets/<?= h($pet['image']) ?>">
 
         <div class="card-body">
           <h5><?= h($pet['name']) ?></h5>
-          <p><?= h($pet['species']) ?> • <?= h($pet['breed']) ?></p>
-          <a href="details.php?id=<?= $pet['pet_id'] ?>" class="btn btn-primary">
-            View Details
+
+          <span class="badge badge-purple"><?= h($pet['species']) ?></span>
+          <span class="badge badge-pink"><?= h($pet['status']) ?></span>
+
+          <p class="mt-2"><?= h($pet['breed']) ?></p>
+
+          <div class="price">$<?= number_format((float)$pet['price'],2) ?></div>
+
+          <a href="details.php?id=<?= $pet['pet_id'] ?>" class="btn btn-primary mt-3">
+            👁 View Details
           </a>
         </div>
       </div>
@@ -45,8 +55,13 @@ $result = mysqli_query($conn, $sql);
 <div class="modal fade" id="imageModal">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content bg-dark">
-      <div class="modal-body p-0">
-        <img src="" id="modalImage" class="img-fluid w-100" alt="Pet image">
+      <div class="modal-header gradient-nav text-white">
+        <h5 id="modalTitle" class="modal-title"></h5>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body p-3">
+        <img src="" id="modalImage" class="img-fluid w-100 rounded" alt="">
       </div>
     </div>
   </div>

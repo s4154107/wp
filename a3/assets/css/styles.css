@@ -1,6 +1,5 @@
-:root {
+:root{
   --primary:#5b5cf6;
-  --primary-dark:#4f46e5;
   --pink:#ec4899;
   --orange:#f59e0b;
   --green:#10b981;
@@ -10,14 +9,11 @@
   --muted:#9ca3af;
 }
 
-*{box-sizing:border-box}
-
 body{
   margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:"Inter",sans-serif;
-  min-height:100vh;
 }
 
 h1,h2,h3,h4,h5,h6,.navbar-brand{
@@ -27,12 +23,12 @@ h1,h2,h3,h4,h5,h6,.navbar-brand{
 
 .gradient-nav{
   background:#5b5cf6;
-  min-height:50px;
+  min-height:48px;
 }
 
 .navbar-brand{
   font-size:20px;
-  font-weight:800;
+  color:white!important;
 }
 
 .nav-link{
@@ -43,18 +39,32 @@ h1,h2,h3,h4,h5,h6,.navbar-brand{
 }
 
 main.container{
-  max-width:1030px;
+  max-width:1050px;
   min-height:72vh;
 }
 
 .page-title{
-  font-size:36px;
   color:#8b5cf6;
+  font-size:36px;
   margin-bottom:25px;
 }
 
-.hero-section{
-  max-width:100%;
+.section-title{
+  font-size:22px;
+  margin-bottom:18px;
+}
+
+.section-title::before{
+  content:"💙 ";
+}
+
+.section-title::after{
+  content:"";
+  display:block;
+  width:50px;
+  height:3px;
+  background:linear-gradient(90deg,#6366f1,#ec4899,#f59e0b);
+  margin-top:6px;
 }
 
 .carousel{
@@ -66,7 +76,8 @@ main.container{
 .carousel-image{
   height:300px;
   object-fit:cover;
-  opacity:.88;
+  width:100%;
+  opacity:.9;
 }
 
 .carousel-caption{
@@ -79,12 +90,8 @@ main.container{
 }
 
 .carousel-caption h2{
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.carousel-caption p{
-  display:none;
+  font-size:16px;
+  margin-bottom:8px;
 }
 
 .carousel-caption .btn{
@@ -93,8 +100,7 @@ main.container{
   border:0;
   font-size:11px;
   font-weight:800;
-  padding:7px 14px;
-  border-radius:6px;
+  padding:6px 12px;
 }
 
 .carousel-control-prev-icon,
@@ -104,98 +110,86 @@ main.container{
   padding:18px;
 }
 
-.section-title{
-  font-size:25px;
-  margin-bottom:20px;
-}
-
-.section-title::before{
-  content:"💙 ";
-}
-
-.section-title::after{
-  content:"";
-  display:block;
-  width:50px;
-  height:3px;
-  background:linear-gradient(90deg,var(--primary),var(--pink),var(--orange));
-  margin-top:8px;
-}
-
-.pet-card,.dark-card{
+.pet-card{
   background:var(--card);
   color:white;
   border:0;
-  border-radius:9px;
+  border-radius:8px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,.35);
 }
 
 .pet-thumb{
-  height:135px;
+  height:130px;
   object-fit:cover;
-}
-
-.gallery-image{
-  height:220px;
-  object-fit:cover;
-  cursor:pointer;
+  width:100%;
 }
 
 .card-body{
-  padding:18px;
+  padding:16px;
 }
 
 .card h5{
+  font-size:16px;
   font-weight:800;
 }
 
-.text-muted{
-  color:var(--muted)!important;
+.card p{
+  color:var(--muted);
+  font-size:12px;
 }
 
 .price{
+  font-size:13px;
   font-weight:800;
   color:white;
 }
 
 .owner-link{
   color:#60a5fa;
-  text-decoration:none;
   font-size:12px;
-  font-weight:600;
+  text-decoration:none;
+  font-weight:700;
 }
 
-.btn-primary,.btn-outline-primary{
-  background:var(--primary);
-  border-color:var(--primary);
-  color:white;
+.btn-primary{
+  background:#5b5cf6;
+  border-color:#5b5cf6;
   font-size:12px;
   font-weight:800;
   border-radius:8px;
   padding:8px 15px;
 }
 
-.btn-primary:hover,.btn-outline-primary:hover{
-  background:var(--primary-dark);
-  border-color:var(--primary-dark);
-}
-
 .btn-pink{
-  background:var(--pink);
+  background:#ec4899;
   color:white;
   border:0;
+  font-size:12px;
   font-weight:800;
+  border-radius:8px;
 }
 
 .btn-orange{
-  background:var(--orange);
+  background:#f59e0b;
   color:#111827;
   border:0;
+  font-size:12px;
   font-weight:800;
+  border-radius:8px;
 }
 
-.form-control,.form-select,textarea{
+.badge-purple{
+  background:#7c3aed;
+}
+
+.badge-pink{
+  background:#ec4899;
+}
+
+.form-control,
+.form-select,
+textarea{
   border-radius:7px;
   font-weight:600;
 }
@@ -213,12 +207,11 @@ main.container{
   border-radius:12px;
 }
 
-.badge-purple{
-  background:#7c3aed;
-}
-
-.badge-pink{
-  background:var(--pink);
+.gallery-image{
+  height:180px;
+  width:100%;
+  object-fit:cover;
+  cursor:pointer;
 }
 
 .detail-img{
@@ -237,7 +230,7 @@ main.container{
 }
 
 .info-table td{
-  padding:14px;
+  padding:13px;
   border-bottom:1px solid #111827;
 }
 
@@ -257,20 +250,4 @@ main.container{
 
 hr{
   border-color:#475569;
-}
-
-.modal-content{
-  border:0;
-  border-radius:8px;
-  overflow:hidden;
-}
-
-.confirm-header{
-  background:var(--pink);
-  color:white;
-}
-
-@media(max-width:768px){
-  .carousel-image{height:230px}
-  .page-title{font-size:28px}
 }
