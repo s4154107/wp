@@ -25,9 +25,7 @@ $result = mysqli_query($conn, $sql);
   <?php while($pet=mysqli_fetch_assoc($result)): ?>
     <div class="col-md-6 col-lg-3 gallery-item" data-status="<?= h($pet['status']) ?>">
       <div class="card pet-card h-100">
-        <img src="/~s4154107/wp/a3/assets/images/pets/<?= h($pet['image_path']) ?>" class="gallery-image" alt="<?= h($pet['name']) ?>" data-bs-toggle="modal" data-bs-target="#imageModal" data-name="<?= h($pet['name']) ?>" data-image="/~s4154107/wp/a3/assets/images/pets/<?= h($pet['image_path']) ?>">
-
-        <div class="card-body">
+        <img src="assets/images/pets/<?= htmlspecialchars($pet['image']) ?>" class="gallery-image" alt="<?= htmlspecialchars($pet['name']) ?>" data-bs-toggle="modal" data-bs-target="#imageModal" data-name="<?= htmlspecialchars($pet['name']) ?>" data-image="assets/images/pets/<?= htmlspecialchars($pet['image']) ?>">
           <h5><?= h($pet['name']) ?></h5>
 
           <span class="badge badge-purple"><?= h($pet['species']) ?></span>
