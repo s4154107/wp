@@ -20,7 +20,7 @@ $latestResult = mysqli_query($conn, $latestSql);
     <div class="carousel-inner">
       <?php $active=true; while($pet=mysqli_fetch_assoc($carouselResult)): ?>
         <div class="carousel-item <?= $active ? 'active' : '' ?>">
-          <img src="assets/images/pets/<?= h($pet['image']) ?>" class="carousel-image" alt="<?= h($pet['name']) ?>">
+          <img src="assets/images/pets/<?= h($pet['image_path']) ?>" class="carousel-image" alt="<?= h($pet['name']) ?>">
           <div class="carousel-caption">
             <h2><?= h($pet['name']) ?></h2>
             <a href="details.php?id=<?= $pet['pet_id'] ?>" class="btn">👁 View Details</a>
@@ -46,7 +46,7 @@ $latestResult = mysqli_query($conn, $latestSql);
     <?php while($pet=mysqli_fetch_assoc($latestResult)): ?>
       <div class="col-md-6 col-lg-3">
         <div class="card pet-card h-100">
-          <img src="assets/images/pets/<?= h($pet['image']) ?>" class="pet-thumb" alt="<?= h($pet['name']) ?>">
+          <img src="/~s4154107/wp/a3/assets/images/pets/<?= h($pet['image_path']) ?>" class="pet-thumb" alt="<?= h($pet['name']) ?>">
 
           <div class="card-body">
             <h5><?= h($pet['name']) ?></h5>

@@ -1,16 +1,14 @@
 <?php
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-$server = $_SERVER['SERVER_NAME'] ?? 'localhost';
+$server = $_SERVER['SERVER_NAME'] ?? '';
 
 if ($server === 'localhost' || $server === '127.0.0.1') {
-    // Local MAMP
     $db_host = 'localhost';
     $db_user = 'root';
     $db_pass = 'root';
     $db_name = 'petconnect';
 } else {
-    // Coreteaching / Jacob 5
     $db_host = 'talsprddb02.int.its.rmit.edu.au';
     $db_user = 's4154107';
     $db_pass = '14492008Ks';

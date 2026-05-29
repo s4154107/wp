@@ -22,12 +22,12 @@ if (isset($_POST['delete']) && logged_in() && $_SESSION['user_id'] == $pet['user
 }
 ?>
 
-<div class="row g-4">
-  <div class="col-lg-5">
-    <img src="assets/images/pets/<?= h($pet['image']) ?>" class="detail-img" alt="<?= h($pet['name']) ?>">
+<div class="row g-4 align-items-start">
+  <div class="col-md-5">
+    <img src="/~s4154107/wp/a3/assets/images/pets/<?= h($pet['image_path']) ?>" alt="<?= h($pet['name']) ?>" class="img-fluid rounded">
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-md-7">
     <h1 class="page-title mb-2"><?= h($pet['name']) ?></h1>
 
     <span class="badge badge-purple"><?= h($pet['species']) ?></span>

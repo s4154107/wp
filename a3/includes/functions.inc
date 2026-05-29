@@ -15,10 +15,11 @@ function logged_in() {
 function current_user() {
     return $_SESSION['username'] ?? null;
 }
-
- function pet_img($path) {
+function pet_img($path) {
     return 'assets/images/pets/' . $path;
 }
+
+
 function get_pet($conn, $id) {
     $sql = "SELECT p.*, u.username, u.email, u.phone, u.location
             FROM pets p

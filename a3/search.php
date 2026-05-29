@@ -37,8 +37,7 @@ if ($q !== '') {
     <?php while($pet=mysqli_fetch_assoc($result)): ?>
       <div class="col-md-6 col-lg-4">
         <div class="card pet-card h-100">
-          <img src="assets/images/pets/<?= h($pet['image']) ?>" class="pet-thumb" alt="<?= h($pet['name']) ?>">
-
+          <img src="/~s4154107/wp/a3/assets/images/pets/<?= h($pet['image_path']) ?>" class="card-img-top pet-card-img" alt="<?= h($pet['name']) ?>">
           <div class="card-body">
             <h5><?= h($pet['name']) ?></h5>
             <p><?= h($pet['species']) ?> • <?= h($pet['breed']) ?></p>
